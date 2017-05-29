@@ -1,10 +1,15 @@
+package com.Game;
+import com.Object.Carre;
+import com.Object.Cote;
+
 import java.util.ArrayList;
+
 
 /**
  * Created by theobeaudenon on 29/05/2017.
  */
 
-class GameInstance {
+public class GameInstance {
 
     int carreX = 5;
     int carreY = 5;
@@ -17,14 +22,16 @@ class GameInstance {
             for(int z =0; z < carreY; z++){
                Cote gauche =  new Cote();
                Cote haut =  new Cote();
-                if(i != 0){
-                   gauche= plateau[i-1][z].getDroite(); // Renvoi le coté de gauche
-                }
                 if(z != 0){
-                    haut= plateau[i][z-1].getBas(); // Renvoi le coté du haut
+                   gauche= plateau[i][z-1].getDroite(); // Renvoi le coté de gauche
                 }
-
-                plateau[i][z] = new Carre(haut,new Cote(),new Cote(),gauche);
+                if(i != 0){
+                    haut= plateau[i-1][z].getBas(); // Renvoi le coté du haut
+                }
+               Carre carre = new Carre(haut,new Cote(),new Cote(),gauche);
+                carre.setX(z);
+                carre.setY(i);
+                plateau[i][z] = carre;
             }
         }
 
@@ -39,7 +46,7 @@ class GameInstance {
         for (int i=0 ; i< carreX; i++){
             for(int z =0; z < carreY; z++){
 
-                if(plateau[i][z].haut.equals(cote) ||plateau[i][z].bas.equals(cote) ||plateau[i][z].gauche.equals(cote) ||plateau[i][z].droite.equals(cote) ){
+                if(plateau[i][z].getHaut().equals(cote) ||plateau[i][z].getBas().equals(cote) ||plateau[i][z].getGauche().equals(cote) ||plateau[i][z].getDroite().equals(cote) ){
                     carreArrayList.add(plateau[i][z]) ;
                 }
 
@@ -48,6 +55,8 @@ class GameInstance {
         return carreArrayList;
     }
 
-
+    public Carre[][] getPlateau() {
+        return plateau;
+    }
 
 }

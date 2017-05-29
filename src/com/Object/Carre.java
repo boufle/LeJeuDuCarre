@@ -1,3 +1,5 @@
+package com.Object;
+
 /**
  * Created by theobeaudenon on 29/05/2017.
  */
@@ -8,6 +10,8 @@ public class Carre {
     Cote bas;
     Cote droite;
     Cote gauche;
+    int x;
+    int y;
 
     Integer playerTaken;
 
@@ -54,5 +58,21 @@ public class Carre {
 
     public void setGauche(Cote gauche) {
         this.gauche = gauche;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
