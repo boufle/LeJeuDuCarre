@@ -39,7 +39,10 @@ public class LigneClickEvent implements ActionListener {
                     }
                 }
                 else {
-                    ((LigneButtonHorrizontale) ligne).getCote().setPlayer(2);
+
+                    /* Joueur */
+
+                    /*((LigneButtonHorrizontale) ligne).getCote().setPlayer(2);
                     ((LigneButtonHorrizontale) ligne).setPlayer2();
                     for (Carre carre : ((LigneButtonHorrizontale) ligne).gameInstance.getCarreFromCote(((LigneButtonHorrizontale) ligne).getCote()))
                     {
@@ -50,7 +53,16 @@ public class LigneClickEvent implements ActionListener {
                             pane1.getComponent(pane1.getComponentCount()-1).setBackground(Color.YELLOW);
                             SingletonGameData.getInstance().setCompteurTourIncrement();
                         }
-                    }
+                    }*/
+
+                    /* Fin joueur */
+
+
+                    /* Bot */
+
+
+
+                    /* Fin Bot */
                 }
 
                 SingletonGameData.getInstance().setCompteurTourIncrement();
@@ -75,7 +87,10 @@ public class LigneClickEvent implements ActionListener {
                     }
                 }
                 else {
-                    ((LigneButtonVerticale) ligne).getCote().setPlayer(2);
+
+                    /* Joueur */
+
+                   /* ((LigneButtonVerticale) ligne).getCote().setPlayer(2);
                     ((LigneButtonVerticale) ligne).setPlayer2();
                     for (Carre carre : ((LigneButtonVerticale) ligne).gameInstance.getCarreFromCote(((LigneButtonVerticale) ligne).getCote()))
                     {
@@ -86,7 +101,14 @@ public class LigneClickEvent implements ActionListener {
                             pane1.getComponent(pane1.getComponentCount()-1).setBackground(Color.YELLOW);
                             SingletonGameData.getInstance().setCompteurTourIncrement();
                         }
-                    }
+                    }*/
+
+                    /* Fin joueur */
+
+                    /* Bot */
+
+
+                    /* Fin Bot */
                 }
                 SingletonGameData.getInstance().setCompteurTourIncrement();
             }
