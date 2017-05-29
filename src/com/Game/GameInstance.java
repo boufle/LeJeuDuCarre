@@ -77,6 +77,9 @@ public class GameInstance {
                 Carre carre =   plateau[i][z];
                 if(!carre.gotTaken()){
 
+                    if(BotUtils.countCoteCarre(carre) == 2){ // Si le carré a 2 coté pris ne touche pas aux arretes de celui-ci. car sinon l'adversaire termine le carré
+                        continue;
+                    }
                     if (carre.getHaut().getPlayer() == null){
                         return carre.getHaut();
                     }
@@ -96,6 +99,29 @@ public class GameInstance {
 
 
 
+
+        //Solution de dernier secours remplis ce qui est disponible
+        for (int i=0 ; i< carreX; i++){
+            for(int z =0; z < carreY; z++){
+                Carre carre =   plateau[i][z];
+                if(!carre.gotTaken()){
+
+                    if (carre.getHaut().getPlayer() == null){
+                        return carre.getHaut();
+                    }
+                    if (carre.getBas().getPlayer() == null){
+                        return carre.getBas();
+                    }
+                    if (carre.getDroite().getPlayer() == null){
+                        return carre.getDroite();
+                    }
+                    if (carre.getGauche().getPlayer() == null){
+                        return carre.getGauche();
+                    }
+
+                }
+            }
+        }
 
         return null;
     }

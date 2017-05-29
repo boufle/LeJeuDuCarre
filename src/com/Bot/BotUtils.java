@@ -9,10 +9,8 @@ import com.Object.Cote;
 public class BotUtils {
 
 
-    public static Cote isNearCompleted(Carre[][] plateau, int i, int z) {
+    public static int countCoteCarre(Carre carre) {
 
-
-        Carre carre = plateau[i][z];
         int count = 0;
         if (carre.getHaut().getPlayer() != null){
             count++;
@@ -26,21 +24,31 @@ public class BotUtils {
         if (carre.getGauche().getPlayer() != null){
             count++;
         }
+        return count;
+    }
 
-        if(count == 3){
-            if (carre.getHaut().getPlayer() == null){
-                return carre.getHaut();
+
+
+        public static Cote isNearCompleted(Carre[][] plateau, int i, int z) {
+
+            Carre carre = plateau[i][z];
+
+            int count = countCoteCarre(carre);
+
+            if(count == 3){
+                if (carre.getHaut().getPlayer() == null){
+                    return carre.getHaut();
+                }
+                if (carre.getBas().getPlayer() == null){
+                    return carre.getBas();
+                }
+                if (carre.getDroite().getPlayer() == null){
+                    return carre.getDroite();
+                }
+                if (carre.getGauche().getPlayer() == null){
+                    return carre.getGauche();
+                }
             }
-            if (carre.getBas().getPlayer() == null){
-                return carre.getBas();
-            }
-            if (carre.getDroite().getPlayer() == null){
-                return carre.getDroite();
-            }
-            if (carre.getGauche().getPlayer() == null){
-                return carre.getGauche();
-            }
-        }
 
         return null;
     }
