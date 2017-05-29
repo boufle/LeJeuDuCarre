@@ -22,6 +22,8 @@ public class LigneClickEvent implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object ligne = e.getSource();
 
+
+
         if (ligne instanceof LigneButtonHorrizontale){
             if (((LigneButtonHorrizontale) ligne).getCote().getPlayer() == null){
                 if (SingletonGameData.getInstance().getCompteurTour() % 2 == 0){
@@ -37,6 +39,7 @@ public class LigneClickEvent implements ActionListener {
                             SingletonGameData.getInstance().setCompteurTourIncrement();
                         }
                     }
+
                 }
                 else {
 
@@ -66,6 +69,34 @@ public class LigneClickEvent implements ActionListener {
                 }
 
                 SingletonGameData.getInstance().setCompteurTourIncrement();
+                Cote botPlayed = ((LigneButtonHorrizontale) ligne).gameInstance.playBot();
+
+
+                JPanel component = (JPanel) ((LigneButtonHorrizontale) ligne).getParent().getParent().getParent().getComponents()[0];
+                for (Component component1 : component.getComponents()) {
+                    JPanel componentin = (JPanel) component1;
+                    for (Component component2 : componentin.getComponents()) {
+                        System.out.println(component2);
+                        if (component2 instanceof LigneButtonHorrizontale) {
+                            LigneButtonHorrizontale ligneh = (LigneButtonHorrizontale) component2;
+
+                            if (ligneh.getCote().equals(botPlayed)) {
+                                ligneh.getCote().setPlayer(2);
+                                ligneh.setPlayer2();
+                            }
+
+                        } else if (component2 instanceof LigneButtonVerticale) {
+                            LigneButtonVerticale ligneh = (LigneButtonVerticale) component2;
+
+                            if (ligneh.getCote().equals(botPlayed)) {
+                                ligneh.getCote().setPlayer(2);
+                                ligneh.setPlayer2();
+                            }
+                        }
+
+                    }
+                }
+
             }
         }
 
@@ -111,6 +142,36 @@ public class LigneClickEvent implements ActionListener {
                     /* Fin Bot */
                 }
                 SingletonGameData.getInstance().setCompteurTourIncrement();
+
+                Cote botPlayed = ((LigneButtonVerticale) ligne).gameInstance.playBot();
+
+                JPanel component = (JPanel) ((LigneButtonVerticale) ligne).getParent().getParent().getParent().getComponents()[0];
+                for (Component component1 : component.getComponents()) {
+                    JPanel componentin = (JPanel) component1;
+                    for (Component component2 : componentin.getComponents()) {
+                        System.out.println(component2);
+                        if (component2 instanceof LigneButtonHorrizontale){
+                            LigneButtonHorrizontale ligneh = (LigneButtonHorrizontale) component2;
+
+                            if(ligneh.getCote().equals(botPlayed)){
+                                ligneh.getCote().setPlayer(2);
+                                ligneh.setPlayer2();
+                            }
+
+                        }else if (component2 instanceof LigneButtonVerticale){
+                            LigneButtonVerticale ligneh = (LigneButtonVerticale) component2;
+
+                            if(ligneh.getCote().equals(botPlayed)){
+                                ligneh.getCote().setPlayer(2);
+                                ligneh.setPlayer2();
+                            }
+                        }
+
+                    }
+                }
+
+                int i = 4;
+
             }
         }
 

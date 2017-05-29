@@ -1,4 +1,5 @@
 package com.Game;
+import com.Bot.BotUtils;
 import com.Object.Carre;
 import com.Object.Cote;
 
@@ -59,4 +60,43 @@ public class GameInstance {
         return plateau;
     }
 
+    public Cote playBot() {
+
+
+        for (int i=0 ; i< carreX; i++){
+            for(int z =0; z < carreY; z++){
+                Cote ligne = BotUtils.isNearCompleted(plateau,i,z);
+                if(ligne!=null){
+                    return ligne;
+                }
+            }
+        }
+
+        for (int i=0 ; i< carreX; i++){
+            for(int z =0; z < carreY; z++){
+                Carre carre =   plateau[i][z];
+                if(!carre.gotTaken()){
+
+                    if (carre.getHaut().getPlayer() == null){
+                        return carre.getHaut();
+                    }
+                    if (carre.getBas().getPlayer() == null){
+                        return carre.getBas();
+                    }
+                    if (carre.getDroite().getPlayer() == null){
+                        return carre.getDroite();
+                    }
+                    if (carre.getGauche().getPlayer() == null){
+                        return carre.getGauche();
+                    }
+
+                }
+            }
+        }
+
+
+
+
+        return null;
+    }
 }
