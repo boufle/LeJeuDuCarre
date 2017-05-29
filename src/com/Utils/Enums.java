@@ -11,4 +11,9 @@ public class Enums {
         TOP,
         BOT;
     }
+
+    public enum LigneType{
+        HORIZONTAL,
+        VERTICAL;
+    }
 }

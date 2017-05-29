@@ -3,8 +3,7 @@ package com.Windows;
 import com.Game.GameInstance;
 import com.Object.Carre;
 import com.Utils.Enums;
-import com.Windows.Component.LigneButtonHorrizontale;
-import com.Windows.Component.LigneButtonVerticale;
+import com.Windows.Component.LigneButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,29 +28,26 @@ public class MainFrame extends JFrame {
                 carre.setLayout(new BorderLayout());
                 if (j == 0){
                     //on met un trait à gauche
-                    LigneButtonVerticale ligneButtonVerticaleLeft = new LigneButtonVerticale(gameInstance);
+                    LigneButton ligneButtonVerticaleLeft = new LigneButton(Enums.LigneType.VERTICAL, gameInstance);
                     ligneButtonVerticaleLeft.setLigneStat(Enums.LigneStat.LEFT);
                     ligneButtonVerticaleLeft.setCote(plateau[i][j].getGauche());
                     carre.add(ligneButtonVerticaleLeft, BorderLayout.WEST);
                 }
                 if (i == 0){
                     //on met un trait en haut
-                    LigneButtonHorrizontale ligneButtonHorrizontaleTop = new LigneButtonHorrizontale();
+                    LigneButton ligneButtonHorrizontaleTop = new LigneButton(Enums.LigneType.HORIZONTAL, gameInstance);
                     ligneButtonHorrizontaleTop.setCote(plateau[i][j].getHaut());
-                    ligneButtonHorrizontaleTop.gameInstance = gameInstance;
                     ligneButtonHorrizontaleTop.setLigneStat(Enums.LigneStat.TOP);
                     carre.add(ligneButtonHorrizontaleTop, BorderLayout.NORTH);
                 }
 
-                LigneButtonVerticale ligneButtonVerticaleRight = new LigneButtonVerticale(gameInstance);
+                LigneButton ligneButtonVerticaleRight = new LigneButton(Enums.LigneType.VERTICAL, gameInstance);
                 ligneButtonVerticaleRight.setCote(plateau[i][j].getDroite());
-                ligneButtonVerticaleRight.gameInstance = gameInstance;
                 ligneButtonVerticaleRight.setLigneStat(Enums.LigneStat.RIGHT);
                 carre.add(ligneButtonVerticaleRight, BorderLayout.EAST);
 
-                LigneButtonHorrizontale ligneButtonHorrizontaleBot = new LigneButtonHorrizontale();
+                LigneButton ligneButtonHorrizontaleBot = new LigneButton(Enums.LigneType.HORIZONTAL, gameInstance);
                 ligneButtonHorrizontaleBot.setCote(plateau[i][j].getBas());
-                ligneButtonHorrizontaleBot.gameInstance = gameInstance;
                 ligneButtonHorrizontaleBot.setLigneStat(Enums.LigneStat.BOT);
                 carre.add(ligneButtonHorrizontaleBot, BorderLayout.SOUTH);
 
