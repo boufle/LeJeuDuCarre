@@ -65,35 +65,41 @@ public class LigneClickEvent implements ActionListener {
                 }
 
                 SingletonGameData.getInstance().setCompteurTourIncrement();
-                Cote botPlayed = ((LigneButton) ligne).gameInstance.playBot();
 
-                JPanel component = (JPanel) ((LigneButton) ligne).getParent().getParent().getParent().getComponents()[0];
-                for (Component component1 : component.getComponents()) {
-                    JPanel componentin = (JPanel) component1;
-                    for (Component component2 : componentin.getComponents()) {
-                        if (component2 instanceof LigneButton) {
-                            LigneButton ligneh = (LigneButton) component2;
+                playBot((LigneButton) ligne);
 
-                            if (ligneh.getCote().equals(botPlayed)) {
-                                ligneh.getCote().setPlayer(2);
-                                ligneh.setPlayer2();
-                            }
-                            for (Carre carre : ((LigneButton) ligne).gameInstance.getCarreFromCote(((LigneButton) ligne).getCote())) {
-                                if (GameRules.getCarreWin(carre) != null) {
-                                    Carre carre1 = GameRules.getCarreWin(carre);
-                                    JPanel pane = (JPanel) ((LigneButton) ligne).getParent().getParent();
-                                    JPanel pane1 = (JPanel) pane.getComponent(carre1.getX() + (carre1.getY() * ((LigneButton) ligne).gameInstance.getPlateau().length));
-                                    pane1.getComponent(pane1.getComponentCount() - 1).setBackground(Color.magenta);
-                                    SingletonGameData.getInstance().setCompteurTourIncrement();
-                                }
-                            }
-
-                        }
-                    }
-                }
-                SingletonGameData.getInstance().setCompteurTourIncrement();
             }
         }
 
+    }
+
+
+    public void playBot(LigneButton ligne){
+        Cote botPlayed = ligne.gameInstance.playBot();
+        JPanel component = (JPanel) ligne.getParent().getParent().getParent().getComponents()[0];
+        for (Component component1 : component.getComponents()) {
+            JPanel componentin = (JPanel) component1;
+            for (Component component2 : componentin.getComponents()) {
+                if (component2 instanceof LigneButton) {
+                    LigneButton ligneh = (LigneButton) component2;
+
+                    if (ligneh.getCote().equals(botPlayed)) {
+                        ligneh.getCote().setPlayer(2);
+                        ligneh.setPlayer2();
+                    }
+                    for (Carre carre : ligne.gameInstance.getCarreFromCote(botPlayed)) {
+                        if (GameRules.getCarreWin(carre) != null) {
+                            Carre carre1 = GameRules.getCarreWin(carre);
+                            JPanel pane = (JPanel) (ligne).getParent().getParent();
+                            JPanel pane1 = (JPanel) pane.getComponent(carre1.getX() + (carre1.getY() * ligne.gameInstance.getPlateau().length));
+                            pane1.getComponent(pane1.getComponentCount() - 1).setBackground(Color.magenta);
+                            playBot(ligne);
+                        }
+                    }
+
+                }
+            }
+        }
+        SingletonGameData.getInstance().setCompteurTourIncrement();
     }
 }

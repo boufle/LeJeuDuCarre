@@ -25,22 +25,22 @@ public class LigneButton extends JButton {
         if (ligneType.equals(Enums.LigneType.HORIZONTAL)){
             ImageIcon icon = new ImageIcon("resources/Horizontale.png");
             Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 85, 10,  java.awt.Image.SCALE_SMOOTH ) ;
+            Image newimg = img.getScaledInstance( 85, 20,  java.awt.Image.SCALE_SMOOTH ) ;
             icon = new ImageIcon( newimg );
             setIcon(icon);
 
-            setSize(new Dimension(100,10));
-            setPreferredSize(new Dimension(100,10));
+            setSize(new Dimension(100,20));
+            setPreferredSize(new Dimension(100,20));
         }
         else if(ligneType.equals(Enums.LigneType.VERTICAL)) {
             ImageIcon icon = new ImageIcon("resources/Verticale.png");
             Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 10, 100,  java.awt.Image.SCALE_SMOOTH ) ;
+            Image newimg = img.getScaledInstance( 20, 100,  java.awt.Image.SCALE_SMOOTH ) ;
             icon = new ImageIcon( newimg );
             setIcon(icon);
 
-            setSize(new Dimension(10,100));
-            setPreferredSize(new Dimension(10,100));
+            setSize(new Dimension(20,100));
+            setPreferredSize(new Dimension(20,100));
         }
 
         addActionListener(new LigneClickEvent());
@@ -71,14 +71,14 @@ public class LigneButton extends JButton {
         if (ligneType.equals(Enums.LigneType.HORIZONTAL)){
             ImageIcon icon = new ImageIcon("resources/HorizontalePlayer1.png");
             Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 85, 10,  java.awt.Image.SCALE_SMOOTH ) ;
+            Image newimg = img.getScaledInstance( 85, 20,  java.awt.Image.SCALE_SMOOTH ) ;
             icon = new ImageIcon( newimg );
             setIcon(icon);
         }
         else {
             ImageIcon icon = new ImageIcon("resources/VerticalePlayer1.png");
             Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 10, 100,  java.awt.Image.SCALE_SMOOTH ) ;
+            Image newimg = img.getScaledInstance( 20, 100,  java.awt.Image.SCALE_SMOOTH ) ;
             icon = new ImageIcon( newimg );
             setIcon(icon);
         }
@@ -89,14 +89,14 @@ public class LigneButton extends JButton {
         if (ligneType.equals(Enums.LigneType.HORIZONTAL)){
             ImageIcon icon = new ImageIcon("resources/HorizontalePlayer2.png");
             Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 85, 10,  java.awt.Image.SCALE_SMOOTH ) ;
+            Image newimg = img.getScaledInstance( 85, 20,  java.awt.Image.SCALE_SMOOTH ) ;
             icon = new ImageIcon( newimg );
             setIcon(icon);
         }
         else {
             ImageIcon icon = new ImageIcon("resources/VerticalePlayer2.png");
             Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 10, 100,  java.awt.Image.SCALE_SMOOTH ) ;
+            Image newimg = img.getScaledInstance( 20, 100,  java.awt.Image.SCALE_SMOOTH ) ;
             icon = new ImageIcon( newimg );
             setIcon(icon);
         }
