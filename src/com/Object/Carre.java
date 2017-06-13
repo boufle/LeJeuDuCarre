@@ -1,5 +1,8 @@
 package com.Object;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * Created by theobeaudenon on 29/05/2017.
  */
@@ -24,7 +27,7 @@ public class Carre {
 
 
     public Boolean gotTaken(){
-        return haut.getPlayer() != null && haut.getPlayer() != null && haut.getPlayer() != null && haut.getPlayer() != null;
+        return haut.getPlayer() != null && bas.getPlayer() != null && droite.getPlayer() != null && gauche.getPlayer() != null;
     }
 
 
@@ -56,6 +59,15 @@ public class Carre {
         return gauche;
     }
 
+    public ArrayList<Cote> getAllCote() {
+        ArrayList<Cote> list = new ArrayList<>();
+        list.add(getBas());
+        list.add(getDroite());
+        list.add(getHaut());
+        list.add(getGauche());
+        return list;
+    }
+
     public void setGauche(Cote gauche) {
         this.gauche = gauche;
     }
@@ -74,5 +86,47 @@ public class Carre {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public Collection<? extends Cote> getAllCoteNotTaken() {
+        ArrayList<Cote> list = new ArrayList<>();
+        if(getBas().getPlayer() == null){
+            list.add(getBas());
+
+        }
+        if(getDroite().getPlayer() == null){
+            list.add(getDroite());
+
+        }
+        if(getHaut().getPlayer() == null){
+            list.add(getHaut());
+
+        }
+        if(getGauche().getPlayer() == null){
+            list.add(getGauche());
+
+        }
+        return list;
+
+    }
+
+    public Cote getCoteNotTaken() {
+        if(getBas().getPlayer() == null){
+            return getBas();
+
+        }
+        if(getDroite().getPlayer() == null){
+            return getDroite();
+
+        }
+        if(getHaut().getPlayer() == null){
+            return getHaut();
+
+        }
+        if(getGauche().getPlayer() == null){
+            return getGauche();
+
+        }
+        return null;
     }
 }

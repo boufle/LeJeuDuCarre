@@ -1,5 +1,6 @@
 package com.Windows;
 
+import com.Bot.BotUtils;
 import com.Game.GameInstance;
 import com.Object.Carre;
 import com.Utils.Enums;
@@ -52,7 +53,8 @@ public class MainFrame extends JFrame {
                 carre.add(ligneButtonHorrizontaleBot, BorderLayout.SOUTH);
 
                 JPanel jPanel = new JPanel();
-                jPanel.setBackground(Color.BLACK);
+               // jPanel.setBackground(Color.BLACK);
+
                 carre.add(jPanel, BorderLayout.CENTER);
 
                 add(carre);

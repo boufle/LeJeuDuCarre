@@ -66,40 +66,42 @@ public class LigneButton extends JButton {
         this.cote = cote;
     }
 
-    public void setPlayer1(){
 
-        if (ligneType.equals(Enums.LigneType.HORIZONTAL)){
-            ImageIcon icon = new ImageIcon("resources/HorizontalePlayer1.png");
-            Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 85, 20,  java.awt.Image.SCALE_SMOOTH ) ;
-            icon = new ImageIcon( newimg );
-            setIcon(icon);
-        }
-        else {
-            ImageIcon icon = new ImageIcon("resources/VerticalePlayer1.png");
-            Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 20, 100,  java.awt.Image.SCALE_SMOOTH ) ;
-            icon = new ImageIcon( newimg );
-            setIcon(icon);
+
+
+    public void setPlayer(int playernumber){
+        if(playernumber==2){
+            if (ligneType.equals(Enums.LigneType.HORIZONTAL)){
+                ImageIcon icon = new ImageIcon("resources/HorizontalePlayer2.png");
+                Image img = icon.getImage();
+                Image newimg = img.getScaledInstance( 85, 20,  java.awt.Image.SCALE_SMOOTH ) ;
+                icon = new ImageIcon( newimg );
+                setIcon(icon);
+            }
+            else {
+                ImageIcon icon = new ImageIcon("resources/VerticalePlayer2.png");
+                Image img = icon.getImage();
+                Image newimg = img.getScaledInstance( 20, 100,  java.awt.Image.SCALE_SMOOTH ) ;
+                icon = new ImageIcon( newimg );
+                setIcon(icon);
+            }
+        }else if(playernumber==1){
+            if (ligneType.equals(Enums.LigneType.HORIZONTAL)){
+                ImageIcon icon = new ImageIcon("resources/HorizontalePlayer1.png");
+                Image img = icon.getImage();
+                Image newimg = img.getScaledInstance( 85, 20,  java.awt.Image.SCALE_SMOOTH ) ;
+                icon = new ImageIcon( newimg );
+                setIcon(icon);
+            }
+            else {
+                ImageIcon icon = new ImageIcon("resources/VerticalePlayer1.png");
+                Image img = icon.getImage();
+                Image newimg = img.getScaledInstance( 20, 100,  java.awt.Image.SCALE_SMOOTH ) ;
+                icon = new ImageIcon( newimg );
+                setIcon(icon);
+            }
         }
 
-    }
-
-    public void setPlayer2(){
-        if (ligneType.equals(Enums.LigneType.HORIZONTAL)){
-            ImageIcon icon = new ImageIcon("resources/HorizontalePlayer2.png");
-            Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 85, 20,  java.awt.Image.SCALE_SMOOTH ) ;
-            icon = new ImageIcon( newimg );
-            setIcon(icon);
-        }
-        else {
-            ImageIcon icon = new ImageIcon("resources/VerticalePlayer2.png");
-            Image img = icon.getImage();
-            Image newimg = img.getScaledInstance( 20, 100,  java.awt.Image.SCALE_SMOOTH ) ;
-            icon = new ImageIcon( newimg );
-            setIcon(icon);
-        }
 
     }
 
