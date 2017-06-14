@@ -6,7 +6,7 @@ package com.Object;
 
 public class Cote {
 
-    Integer player;
+    Integer player = null;
 
     public Cote() {
     }

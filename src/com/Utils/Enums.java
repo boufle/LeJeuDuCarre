@@ -16,4 +16,10 @@ public class Enums {
         HORIZONTAL,
         VERTICAL;
     }
+
+    public enum GameType{
+        BOTVSBOT,
+        HUMAINVSHUMAIN,
+        BOTVSHUMAIN;
+    }
 }

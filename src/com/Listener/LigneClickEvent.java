@@ -7,6 +7,7 @@ import com.Object.Cote;
 import com.Object.Couloir;
 import com.Object.Score;
 import com.Singleton.SingletonGameData;
+import com.Utils.Enums;
 import com.Utils.GameRules;
 import com.Windows.Component.LigneButton;
 import com.Windows.MainFrame;
@@ -32,97 +33,80 @@ public class LigneClickEvent implements ActionListener {
 
         boolean isiwin = false;
 
-
         if (ligne instanceof LigneButton) {
-            if (((LigneButton) ligne).getCote().getPlayer() == null || true) {
-                if (SingletonGameData.getInstance().getCompteurTour() % 2 == 569) {
-                    ((LigneButton) ligne).getCote().setPlayer(1);
-                    ((LigneButton) ligne).setPlayer(1);
-                    for (Carre carre : ((LigneButton) ligne).gameInstance.getCarreFromCote(((LigneButton) ligne).getCote())) {
-                        if (GameRules.getCarreWin(carre) != null) {
-                            Carre carre1 = GameRules.getCarreWin(carre);
-                            JPanel pane = (JPanel) ((LigneButton) ligne).getParent().getParent();
-                            JPanel pane1 = (JPanel) pane.getComponent(carre1.getX() + (carre1.getY() * ((LigneButton) ligne).gameInstance.getPlateau().length));
-                            pane1.getComponent(pane1.getComponentCount() - 1).setBackground(Color.RED);
-                            SingletonGameData.getInstance().setCompteurTourIncrement();
-                              isiwin = true;
 
-                        }
-                    }
-                    displaydebug((LigneButton) ligne);
+            if (SingletonGameData.getInstance().getGameType().equals(Enums.GameType.BOTVSBOT)){
+                    if(!isiwin){
+                        Thread thread = new Thread(){
+                            public void run(){
+                                boolean b = playBot((LigneButton) ligne, 1);
+                                boolean b1 = playBot((LigneButton) ligne, 2);
 
-                } else {
-
-                    /* Joueur */
-
-                    /*((LigneButtonHorrizontale) ligne).getCote().setPlayer(2);
-                    ((LigneButtonHorrizontale) ligne).setPlayer2();
-                    for (Carre carre : ((LigneButtonHorrizontale) ligne).gameInstance.getCarreFromCote(((LigneButtonHorrizontale) ligne).getCote()))
-                    {
-                        if (GameRules.getCarreWin(carre) != null){
-                            Carre carre1 = GameRules.getCarreWin(carre);
-                            JPanel pane = (JPanel) ((LigneButtonHorrizontale) ligne).getParent().getParent();
-                            JPanel pane1 = (JPanel) pane.getComponent(carre1.getX() + (carre1.getY() * ((LigneButtonHorrizontale) ligne).gameInstance.getPlateau().length));
-                            pane1.getComponent(pane1.getComponentCount()-1).setBackground(Color.YELLOW);
-                            SingletonGameData.getInstance().setCompteurTourIncrement();
-                        }
-                    }*/
-
-                    /* Fin joueur */
-
-
-                    /* Bot */
-
-
-                    /* Fin Bot */
-                }
-
-                //SingletonGameData.getInstance().setCompteurTourIncrement();
-
-                if(!isiwin){
-                    Thread thread = new Thread(){
-                        public void run(){
-                            boolean b = playBot((LigneButton) ligne, 1);
-                            boolean b1 = playBot((LigneButton) ligne, 2);
-
-                            if(b || b1){
-                               actionPerformed(e);
-
-                            }
-
-                            if(!b && !b1){
-                                Score score = ((LigneButton) ligne).gameInstance.getScore();
-                                System.out.println(score);
-                                try {
-                                    Files.write(Paths.get("resources/export.csv"), (score.score1+";"+score.score2+"\r\n").getBytes(), StandardOpenOption.APPEND);
-                                }catch (IOException e) {
-                                   e.printStackTrace();
+                                if(b || b1){
+                                    actionPerformed(e);
                                 }
 
-                                SingletonGameData.getInstance();
+                                if(!b && !b1){
+                                    Score score = ((LigneButton) ligne).gameInstance.getScore();
+                                    System.out.println(score);
+                                    try {
+                                        Files.write(Paths.get("resources/export.csv"), (score.score1+";"+score.score2+"\r\n").getBytes(), StandardOpenOption.APPEND);
+                                    }catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
 
-                                GameInstance gameInstance = new GameInstance();
-                                MainFrame mainFrame = new MainFrame(5, 5, gameInstance);
+                                   /* SingletonGameData.getInstance();
+                                    GameInstance gameInstance = new GameInstance();
+                                    MainFrame mainFrame = new MainFrame(5, 5, gameInstance);*/
+
+                                }
+                            }
+                        };
+                        thread.start();
+                    }
+            }
+            else if(SingletonGameData.getInstance().getGameType().equals(Enums.GameType.BOTVSHUMAIN)){
+
+            }
+
+            else if(SingletonGameData.getInstance().getGameType().equals(Enums.GameType.HUMAINVSHUMAIN)){
+
+                if (((LigneButton) ligne).getCote().getPlayer() == null) {
+                    if (SingletonGameData.getInstance().getCompteurTour() % 2 == 0) {
+                        ((LigneButton) ligne).getCote().setPlayer(1);
+                        ((LigneButton) ligne).setPlayer(1);
+                        for (Carre carre : ((LigneButton) ligne).gameInstance.getCarreFromCote(((LigneButton) ligne).getCote())) {
+                            if (GameRules.getCarreWin(carre) != null) {
+                                Carre carre1 = GameRules.getCarreWin(carre);
+                                JPanel pane = (JPanel) ((LigneButton) ligne).getParent().getParent();
+                                JPanel pane1 = (JPanel) pane.getComponent(carre1.getX() + (carre1.getY() * ((LigneButton) ligne).gameInstance.getPlateau().length));
+                                pane1.getComponent(pane1.getComponentCount() - 1).setBackground(Color.RED);
+                                SingletonGameData.getInstance().setCompteurTourIncrement();
+                                isiwin = true;
 
                             }
-
-
-
                         }
-                    };
+                        SingletonGameData.getInstance().setCompteurTourIncrement();
+                        displaydebug((LigneButton) ligne);
 
-                    thread.start();
+                    } else {
 
+                        ((LigneButton) ligne).getCote().setPlayer(2);
+                        ((LigneButton) ligne).setPlayer(2);
+                        for (Carre carre : ((LigneButton) ligne).gameInstance.getCarreFromCote(((LigneButton) ligne).getCote()))
+                        {
+                            if (GameRules.getCarreWin(carre) != null){
+                                Carre carre1 = GameRules.getCarreWin(carre);
+                                JPanel pane = (JPanel) ((LigneButton) ligne).getParent().getParent();
+                                JPanel pane1 = (JPanel) pane.getComponent(carre1.getX() + (carre1.getY() * ((LigneButton) ligne).gameInstance.getPlateau().length));
+                                pane1.getComponent(pane1.getComponentCount()-1).setBackground(Color.YELLOW);
+                                SingletonGameData.getInstance().setCompteurTourIncrement();
+                            }
+                        }
+                        SingletonGameData.getInstance().setCompteurTourIncrement();
+                    }
 
                 }
-
-
-
-
-
-
-
-
 
             }
         }
@@ -132,7 +116,7 @@ public class LigneClickEvent implements ActionListener {
 
     public boolean playBot(LigneButton ligne,int playernumber){
         try {
-            Thread.sleep(10);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -169,7 +153,6 @@ public class LigneClickEvent implements ActionListener {
 
                             }else {
                                 pane1.getComponent(pane1.getComponentCount() - 1).setBackground(Color.red);
-
                             }
 
                             isiwin = true;
