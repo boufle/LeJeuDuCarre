@@ -66,7 +66,37 @@ public class LigneClickEvent implements ActionListener {
                     }
             }
             else if(SingletonGameData.getInstance().getGameType().equals(Enums.GameType.BOTVSHUMAIN)){
+                if (((LigneButton) ligne).getCote().getPlayer() == null) {
+                    if (SingletonGameData.getInstance().getCompteurTour() % 2 == 0) {
+                        ((LigneButton) ligne).getCote().setPlayer(1);
+                        ((LigneButton) ligne).setPlayer(1);
+                        for (Carre carre : ((LigneButton) ligne).gameInstance.getCarreFromCote(((LigneButton) ligne).getCote())) {
+                            if (GameRules.getCarreWin(carre) != null) {
+                                Carre carre1 = GameRules.getCarreWin(carre);
+                                JPanel pane = (JPanel) ((LigneButton) ligne).getParent().getParent();
+                                JPanel pane1 = (JPanel) pane.getComponent(carre1.getX() + (carre1.getY() * ((LigneButton) ligne).gameInstance.getPlateau().length));
+                                pane1.getComponent(pane1.getComponentCount() - 1).setBackground(Color.RED);
+                                SingletonGameData.getInstance().setCompteurTourIncrement();
+                                isiwin = true;
 
+                            }
+                        }
+                        SingletonGameData.getInstance().setCompteurTourIncrement();
+                    //    displaydebug((LigneButton) ligne);
+
+
+                        if(!isiwin){
+                            Thread thread = new Thread(){
+                                public void run(){
+                                    boolean b = playBot((LigneButton) ligne, 2);
+                                }
+                            };
+                            thread.start();
+                        }
+
+                    }
+
+                }
             }
 
             else if(SingletonGameData.getInstance().getGameType().equals(Enums.GameType.HUMAINVSHUMAIN)){
@@ -165,7 +195,7 @@ public class LigneClickEvent implements ActionListener {
         }
 
 
-      displaydebug(ligne);
+     // displaydebug(ligne);
 
 
         if (isiwin){
