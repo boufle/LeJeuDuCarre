@@ -16,7 +16,7 @@ public class Carre {
     int x;
     int y;
 
-    Integer playerTaken;
+    public int playerTaken;
 
     public Carre(Cote haut, Cote bas, Cote droite, Cote gauche) {
         this.haut = haut;

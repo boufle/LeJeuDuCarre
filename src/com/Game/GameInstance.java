@@ -3,6 +3,7 @@ import com.Bot.BotUtils;
 import com.Object.Carre;
 import com.Object.Cote;
 import com.Object.Couloir;
+import com.Object.Score;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,6 +43,27 @@ public class GameInstance {
 
 
         int i = 0;
+
+    }
+
+    public Score getScore(){
+        Score score = new Score();
+        for (int i=0 ; i< carreX; i++){
+            for(int z =0; z < carreY; z++){
+                Carre carre =   plateau[i][z];
+                if(carre.playerTaken==1){
+                    score.score1++;
+
+                }else if(carre.playerTaken == 2){
+                    score.score2++;
+
+                }
+
+
+            }
+        }
+
+        return score;
 
     }
 

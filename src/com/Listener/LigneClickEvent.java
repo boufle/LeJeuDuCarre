@@ -1,17 +1,24 @@
 package com.Listener;
 
 import com.Bot.BotUtils;
+import com.Game.GameInstance;
 import com.Object.Carre;
 import com.Object.Cote;
 import com.Object.Couloir;
+import com.Object.Score;
 import com.Singleton.SingletonGameData;
 import com.Utils.GameRules;
 import com.Windows.Component.LigneButton;
+import com.Windows.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 /**
@@ -76,11 +83,30 @@ public class LigneClickEvent implements ActionListener {
                     Thread thread = new Thread(){
                         public void run(){
                             boolean b = playBot((LigneButton) ligne, 1);
-                            /*boolean b1 = playBot((LigneButton) ligne, 2);
-                            if(b || b1){
-                                actionPerformed(e);
+                            boolean b1 = playBot((LigneButton) ligne, 2);
 
-                            }*/
+                            if(b || b1){
+                               actionPerformed(e);
+
+                            }
+
+                            if(!b && !b1){
+                                Score score = ((LigneButton) ligne).gameInstance.getScore();
+                                System.out.println(score);
+                                try {
+                                    Files.write(Paths.get("resources/export.csv"), (score.score1+";"+score.score2+"\r\n").getBytes(), StandardOpenOption.APPEND);
+                                }catch (IOException e) {
+                                   e.printStackTrace();
+                                }
+
+                                SingletonGameData.getInstance();
+
+                                GameInstance gameInstance = new GameInstance();
+                                MainFrame mainFrame = new MainFrame(5, 5, gameInstance);
+
+                            }
+
+
 
                         }
                     };
@@ -106,7 +132,7 @@ public class LigneClickEvent implements ActionListener {
 
     public boolean playBot(LigneButton ligne,int playernumber){
         try {
-            Thread.sleep(100);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -135,6 +161,7 @@ public class LigneClickEvent implements ActionListener {
                     for (Carre carre : ligne.gameInstance.getCarreFromCote(botPlayed)) {
                         if (GameRules.getCarreWin(carre) != null) {
                             Carre carre1 = GameRules.getCarreWin(carre);
+                            carre1.playerTaken = playernumber;
                             JPanel pane = (JPanel) (ligne).getParent().getParent();
                             JPanel pane1 = (JPanel) pane.getComponent(carre1.getX() + (carre1.getY() * ligne.gameInstance.getPlateau().length));
                             if(playernumber==2){
