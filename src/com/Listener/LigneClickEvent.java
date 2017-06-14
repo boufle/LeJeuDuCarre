@@ -198,6 +198,7 @@ public class LigneClickEvent implements ActionListener {
      // displaydebug(ligne);
 
 
+
         if (isiwin){
 
             playBot(ligne,playernumber);
