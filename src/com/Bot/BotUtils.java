@@ -60,6 +60,26 @@ public class BotUtils {
     public static ArrayList<Couloir> getCouloirs(Carre[][] plateau, int carreX, int carreY) {
         ArrayList<Couloir> couloirArrayList = new ArrayList<>();
 
+        int couloirint = 0;
+        ArrayList<Color> colors = new ArrayList<>();
+
+        colors.add(new Color(234, 104, 187));
+        colors.add(new Color(18, 234, 168));
+        colors.add(new Color(94, 161, 234));
+        colors.add(new Color(234, 194, 58));
+        colors.add(new Color(171, 215, 234));
+        colors.add(new Color(159, 127, 234));
+        colors.add(new Color(234, 22, 209));
+        colors.add(new Color(39, 234, 215));
+        colors.add(new Color(91, 234, 96));
+        colors.add(new Color(234, 120, 80));
+        colors.add(new Color(135, 158, 234));
+        colors.add(new Color(106, 234, 78));
+        colors.add(new Color(196, 142, 234));
+        colors.add(new Color(234, 125, 5));
+        colors.add(new Color(106, 234, 78));
+        colors.add(new Color(108, 182, 234));
+
         for (int i=0 ; i< carreX; i++) {
             for (int z = 0; z < carreY; z++) {
                 Carre carre = plateau[i][z];
@@ -93,7 +113,8 @@ public class BotUtils {
                         }
 
                         if(!taken){
-                            Couloir couloir = new Couloir(new Color((int)(Math.random() * 0x1000000)));
+                            couloirint++;
+                            Couloir couloir = new Couloir(colors.get(couloirint));
                             couloir.getCarres().add(carre);
                             couloirArrayList.add(couloir);
 
